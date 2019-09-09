@@ -1,0 +1,93 @@
+{
+  "name": "react-baconjs",
+  "version": "0.0.0",
+  "description": "React bindings for Bacon.js",
+  "author": "Steve Taylor",
+  "license": "MIT",
+  "repository": "steve-taylor/react-baconjs",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "ci-cd": "echo 'CI-CD' && npm-run-all --silent clean --parallel ci-cd-*",
+    "ci-cd-audit": "npm audit",
+    "ci-cd-lint": "npm-run-all --silent lint",
+    "ci-cd-test": "npm run test",
+    "clean": "echo 'CLEAN' && npm-run-all --silent --parallel clean-*",
+    "clean-coverage": "rimraf coverage",
+    "clean-dist": "rimraf dist",
+    "lint": "eslint src/**/*.js",
+    "test": "echo 'TEST' && cross-env NODE_ENV=test npm-run-all --silent test-*",
+    "test-run": "cross-env NODE_ENV=development jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "snapshotSerializers": [
+      "./test/serializers/render-to-html-serializer"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+          ],
+          "plugins": [
+            "@babel/plugin-transform-runtime",
+            "@babel/plugin-proposal-class-properties"
+          ]
+        }
+      ],
+      "envify"
+    ]
+  },
+  "peerDependencies": {
+    "baconjs": ">=0.7.59 <4",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "styled-components": ">=3.3.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.6.0",
+    "babel-plugin-styled-components": "^1.10.6",
+    "babelify": "^10.0.0",
+    "envify": "^4.1.0",
+    "hash.js": "^1.1.7",
+    "serialize-javascript": "^2.1.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "baconjs": "^3.0.10",
+    "cross-env": "^5.2.1",
+    "eslint": "^6.3.0",
+    "eslint-config-foxsports": "^0.1.2",
+    "jest": "^24.9.0",
+    "npm-run-all": "^4.1.5",
+    "pretty": "^2.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "rimraf": "^3.0.0",
+    "styled-components": "^4.3.2"
+  }
+}
