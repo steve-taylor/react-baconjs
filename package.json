@@ -1,6 +1,6 @@
 {
   "name": "react-baconjs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "React bindings for Bacon.js",
   "author": "Steve Taylor",
   "license": "MIT",
