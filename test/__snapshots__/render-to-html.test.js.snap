@@ -106,7 +106,7 @@ exports[`renderToHtml(widget) <Inject /> simple widget without mount point class
 
 exports[`renderToHtml(widget) <Inject /> styled nested widget renders correctly 1`] = `
 <head>
-  <style data-styled="hviKxk ktmfLE" data-styled-version="4.3.2">
+  <style data-styled="hviKxk ktmfLE" data-styled-version="4.4.1">
     /* sc-component-id: StyledSection-sc-1pmgz9-0 */
     .hviKxk {
       padding: 7px;
@@ -261,7 +261,7 @@ exports[`renderToHtml(widget) No context simple widget without mount point class
 
 exports[`renderToHtml(widget) No context styled nested widget renders correctly 1`] = `
 <head>
-  <style data-styled="gJnFZ jVrfhf" data-styled-version="4.3.2">
+  <style data-styled="gJnFZ jVrfhf" data-styled-version="4.4.1">
     /* sc-component-id: StyledSection-u1gdt8-0 */
     .gJnFZ {
       padding: 7px;
@@ -428,7 +428,7 @@ exports[`renderToHtml(widget) useWidgetState() simple widget without mount point
 
 exports[`renderToHtml(widget) useWidgetState() styled nested widget renders correctly 1`] = `
 <head>
-  <style data-styled="byIVD cTscyz" data-styled-version="4.3.2">
+  <style data-styled="byIVD cTscyz" data-styled-version="4.4.1">
     /* sc-component-id: StyledSection-sc-1mtmxii-0 */
     .byIVD {
       padding: 7px;

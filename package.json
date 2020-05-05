@@ -62,13 +62,13 @@
     "styled-components": ">=3.3.3"
   },
   "dependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.6.0",
-    "babel-plugin-styled-components": "^1.10.6",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/runtime": "^7.9.6",
+    "babel-plugin-styled-components": "^1.10.7",
     "babelify": "^10.0.0",
     "envify": "^4.1.0",
     "hash.js": "^1.1.7",
@@ -76,18 +76,18 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "babel-jest": "^24.9.0",
-    "baconjs": "^3.0.10",
-    "cross-env": "^5.2.1",
-    "eslint": "^6.3.0",
+    "babel-jest": "^26.0.0",
+    "baconjs": "^3.0.13",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
     "eslint-config-foxsports": "^0.1.2",
-    "jest": "^24.9.0",
+    "jest": "^26.0.0",
     "npm-run-all": "^4.1.5",
     "pretty": "^2.0.0",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "rimraf": "^3.0.0",
-    "styled-components": "^4.3.2"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "styled-components": "^4.4.1"
   }
 }
