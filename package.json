@@ -4,28 +4,33 @@
   "description": "React bindings for Bacon.js",
   "author": "Steve Taylor",
   "license": "MIT",
-  "repository": "steve-taylor/react-baconjs",
-  "main": "src/index.js",
-  "publishConfig": {
-    "access": "public"
-  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "type": "module",
+  "types": "lib",
   "scripts": {
-    "ci-cd": "echo 'CI-CD' && npm-run-all --silent clean --parallel ci-cd-*",
-    "ci-cd-audit": "npm audit",
-    "ci-cd-lint": "npm-run-all --silent lint",
-    "ci-cd-test": "npm run test",
-    "clean": "echo 'CLEAN' && npm-run-all --silent --parallel clean-*",
-    "clean-coverage": "rimraf coverage",
-    "clean-dist": "rimraf dist",
-    "lint": "eslint src/**/*.js",
-    "test": "echo 'TEST' && cross-env NODE_ENV=test npm-run-all --silent test-*",
-    "test-run": "cross-env NODE_ENV=development jest"
+    "ci-cd": "echo 'CI-CD' && npm-run-all --silent clean --parallel ci-cd:*",
+    "ci-cd:audit": "npm audit",
+    "ci-cd:lint": "run-s --silent lint",
+    "ci-cd:test": "npm run test",
+    "ci-cd:build": "run-s --silent build",
+    "clean": "echo 'CLEAN' && run-p --silent clean:*",
+    "clean:coverage": "rimraf coverage",
+    "clean:dist": "rimraf dist",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "test": "echo 'TEST' && NODE_ENV=test run-s --silent test:*",
+    "test:run": "NODE_ENV=development jest",
+    "debug:test": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --runInBand $@",
+    "build": "npm run clean && run-s build:*",
+    "build:esm": "tsc -p .",
+    "build:es5": "tsc -p ./tsconfig-cjs.json"
   },
   "jest": {
+    "preset": "ts-jest",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/index.js"
+      "src/**/*.ts*",
+      "!src/index.ts"
     ],
     "coverageReporters": [
       "json",
@@ -36,58 +41,48 @@
       "./test/serializers/render-to-html-serializer"
     ]
   },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env",
-            "@babel/preset-react"
-          ],
-          "plugins": [
-            "@babel/plugin-transform-runtime",
-            "@babel/plugin-proposal-class-properties"
-          ]
-        }
-      ],
-      "envify"
-    ]
-  },
   "peerDependencies": {
-    "baconjs": ">=0.7.59 <4",
+    "baconjs": ">=3.0.0 <4",
+    "lodash": "^4.17.19",
     "prop-types": "^15.6.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "styled-components": ">=3.3.3"
   },
-  "dependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/runtime": "^7.9.6",
-    "babel-plugin-styled-components": "^1.10.7",
-    "babelify": "^10.0.0",
-    "envify": "^4.1.0",
-    "hash.js": "^1.1.7",
-    "serialize-javascript": "^2.1.0",
-    "uuid": "^3.3.3"
-  },
   "devDependencies": {
-    "babel-jest": "^26.0.0",
+    "@types/jest": "^26.0.9",
+    "@types/lodash": "^4.14.159",
+    "@types/node": "^14.0.27",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.45",
+    "@types/react-dom": "^16.9.8",
+    "@types/serialize-javascript": "^1.5.0",
+    "@types/styled-components": "^4.4.3",
+    "@types/uuid": "^8.0.1",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
     "baconjs": "^3.0.13",
-    "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
-    "eslint-config-foxsports": "^0.1.2",
-    "jest": "^26.0.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-react": "^7.20.5",
+    "jest": "^26.2.2",
+    "lodash": "^4.17.19",
     "npm-run-all": "^4.1.5",
     "pretty": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "hash.js": "^1.1.7",
+    "serialize-javascript": "^4.0.0",
+    "uuid": "^8.3.0"
+  },
+  "resolutions": {
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "16.9.8"
   }
 }
