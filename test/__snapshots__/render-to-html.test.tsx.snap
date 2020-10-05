@@ -17,21 +17,16 @@ exports[`renderToHtml(widget) <Inject /> nested widget renders correctly 1`] = `
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "nested--injected", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "coefficient": 9
       },
       "hydration": {
-        "nested--injected--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": {
-          "v": 3,
-          "w": 8
-        },
-        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "nested--injected--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": [3, 8],
+        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -41,7 +36,7 @@ exports[`renderToHtml(widget) <Inject /> regular component with mount point clas
 
 <body>
   <div>
-    <div data-reactroot="">Hello ;)</div>
+    <div data-reactroot="">Hello 🙂</div>
   </div>
 </body>
 `;
@@ -51,7 +46,7 @@ exports[`renderToHtml(widget) <Inject /> regular component without mount point c
 
 <body>
   <div class="mount-point">
-    <div data-reactroot="">Hello ;)</div>
+    <div data-reactroot="">Hello 🙂</div>
   </div>
 </body>
 `;
@@ -65,17 +60,15 @@ exports[`renderToHtml(widget) <Inject /> simple widget with mount point classNam
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "simple--injected", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "power": 4
       },
       "hydration": {
-        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -89,17 +82,15 @@ exports[`renderToHtml(widget) <Inject /> simple widget without mount point class
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "simple--injected", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "power": 4
       },
       "hydration": {
-        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -136,28 +127,23 @@ exports[`renderToHtml(widget) <Inject /> styled nested widget renders correctly 
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "nested-with-styles--injected", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "coefficient": 9
       },
       "hydration": {
-        "nested-with-styles--injected--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": {
-          "v": 3,
-          "w": 8
-        },
-        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "nested-with-styles--injected--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": [3, 8],
+        "simple--injected--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
 
 exports[`renderToHtml(widget) onMeta child overrides parent; last sibling wins accumulates the expected data 1`] = `
 Object {
-  "maxAge": 30,
+  "maxAge": 60,
 }
 `;
 
@@ -184,21 +170,16 @@ exports[`renderToHtml(widget) useWidgetState() nested widget renders correctly 1
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "nested--hooked", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "coefficient": 9
       },
       "hydration": {
-        "nested--hooked--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": {
-          "v": 3,
-          "w": 8
-        },
-        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "nested--hooked--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": [3, 8],
+        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -208,7 +189,7 @@ exports[`renderToHtml(widget) useWidgetState() regular component with mount poin
 
 <body>
   <div>
-    <div data-reactroot="">Hello ;)</div>
+    <div data-reactroot="">Hello 🙂</div>
   </div>
 </body>
 `;
@@ -218,7 +199,7 @@ exports[`renderToHtml(widget) useWidgetState() regular component without mount p
 
 <body>
   <div class="mount-point">
-    <div data-reactroot="">Hello ;)</div>
+    <div data-reactroot="">Hello 🙂</div>
   </div>
 </body>
 `;
@@ -232,17 +213,15 @@ exports[`renderToHtml(widget) useWidgetState() simple widget with mount point cl
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "simple--hooked", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "power": 4
       },
       "hydration": {
-        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -256,17 +235,15 @@ exports[`renderToHtml(widget) useWidgetState() simple widget without mount point
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "simple--hooked", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "power": 4
       },
       "hydration": {
-        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;
@@ -303,21 +280,16 @@ exports[`renderToHtml(widget) useWidgetState() styled nested widget renders corr
   </div>
   <script type="text/javascript">
     Object.assign(["__WIDGET_DATA__", "nested-with-styles--hooked", "instances", "0123456789abcdef"].reduce(function(a, b) {
-      return a[b] = a[b] || {};
+      return a[b] = a[b] || {}
     }, window), {
       "props": {
         "coefficient": 9
       },
       "hydration": {
-        "nested-with-styles--hooked--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": {
-          "v": 3,
-          "w": 8
-        },
-        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": {
-          "baseValue": 5
-        }
+        "nested-with-styles--hooked--27152bfa9d152695b053e71d6ee08263979ed379d64fa16bfd8efdbf85ee0ffa": [3, 8],
+        "simple--hooked--f042b037451958bdc45147be8b9d937045a13c3523f59ba3514bebb4db43730c": 5
       }
-    });
+    })
   </script>
 </body>
 `;

@@ -1,19 +1,19 @@
-import React, {useLayoutEffect, useRef} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useLayoutEffect, useRef} from 'react'
+import ReactDOM from 'react-dom'
 
-import VerySimpleWidget1 from './data/hook/widgets/very-simple';
-import VerySimpleWidget2 from './data/inject/widgets/very-simple';
+import VerySimpleWidget1 from './data/hook/widgets/very-simple'
+import VerySimpleWidget2 from './data/inject/widgets/very-simple'
 
 describe('Forward refs to underlying component', () => {
-    let mountElement: HTMLDivElement | undefined;
+    let mountElement: HTMLDivElement | undefined
 
     beforeEach(() => {
-        mountElement = document.body.appendChild(document.createElement('div'));
-    });
+        mountElement = document.body.appendChild(document.createElement('div'))
+    })
 
     afterEach(() => {
-        ReactDOM.unmountComponentAtNode(mountElement!);
-        document.body.removeChild(mountElement!);
+        ReactDOM.unmountComponentAtNode(mountElement!)
+        document.body.removeChild(mountElement!)
     });
 
     [
@@ -29,27 +29,27 @@ describe('Forward refs to underlying component', () => {
         describe(name, () => {
             beforeEach(() => {
                 const Component: React.FC<{}> = () => {
-                    const ref = useRef<HTMLElement>(null);
+                    const ref = useRef<HTMLElement>(null)
 
                     useLayoutEffect(() => {
                         // Vandalize the DOM element
-                        ref.current!.className = 'ref-test';
-                    }, []);
+                        ref.current!.className = 'ref-test'
+                    }, [])
 
                     return (
                         <VerySimpleWidget
                             ref={ref}
                             power={2}
                         />
-                    );
-                };
+                    )
+                }
 
-                ReactDOM.render(<Component />, mountElement!);
-            });
+                ReactDOM.render(<Component />, mountElement!)
+            })
 
-            test('it changes the root element\'s className', () => {
-                expect(mountElement!.querySelector('section')!.className).toBe('ref-test');
-            });
-        });
-    });
-});
+            test('it changes the root element’s className', () => {
+                expect(mountElement!.querySelector('section')!.className).toBe('ref-test')
+            })
+        })
+    })
+})

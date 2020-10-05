@@ -1,13 +1,14 @@
 // Common
-export {default as widget} from './widget';
-export {default as useWidgetState} from './use-widget-state';
-export {default as Inject} from './inject';
-export {Serializable, SerializableObject, WidgetContext} from './types';
+export {default as widget} from './widget'
+export {default as useWidgetState} from './useWidgetState'
+export {Inject, Loading} from './inject'
+export {default as connect} from './connect'
+export {Serializable, SerializableObject, WidgetContext, WidgetData} from './types'
 
 // Server
-export {default as renderToHtml} from './render-to-html';
-export {default as StyledComponentsServerRenderer} from './styled-components-server-renderer';
-export {SSR_TIMEOUT_ERROR} from './errors';
+export {default as renderToHtml} from './renderToHtml'
+export {default as StyledComponentsServerRenderer} from './StyledComponentsServerRenderer'
+export {SSR_TIMEOUT_ERROR} from './errors'
 
 // Browser
-export {default as hydrate} from './hydrate';
+export {default as hydrate} from './hydrate'

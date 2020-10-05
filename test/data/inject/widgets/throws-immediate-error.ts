@@ -1,13 +1,15 @@
 import {widget} from '../../../../src';
 
 import context from '../../context/throws-error-context';
-import {stream, initialState} from '../../widget-streams/throws-immediate-error';
+import {state} from '../../widget-streams/throws-immediate-error';
 import component from '../components/throws-error';
 
 export default widget({
     name: 'throws-immediate-error--injected',
-    component,
     context,
-    stream,
-    initialState,
-});
+    component,
+    state,
+    dehydrate: () => ({}),
+    hydrate: () => ({}),
+    meta: () => ({}),
+})

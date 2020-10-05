@@ -1,20 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Inject} from '../../../../src';
+import React from 'react'
+import styled from 'styled-components'
+import {Inject} from '../../../../src'
 
-import nestedWithStylesContext from '../../context/nested-with-styles-context';
-import SimpleWidget from '../widgets/simple';
+import nestedWithStylesContext from '../../context/nested-with-styles-context'
+import SimpleWidget from '../widgets/simple'
 
 const StyledSection = styled.section`
     padding: 7px;
     background: #bbb;
-`;
+`
 
 const StyledList = styled.ul`
     margin: 7px;
     background: #666;
     color: #ddd;
-`;
+`
 
 const NestedWithStyles = () => (
     <StyledSection>
@@ -38,6 +38,6 @@ const NestedWithStyles = () => (
             </li>
         </StyledList>
     </StyledSection>
-);
+)
 
-export default NestedWithStyles;
+export default NestedWithStyles

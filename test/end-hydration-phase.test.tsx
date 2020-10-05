@@ -1,19 +1,21 @@
-import {combineTemplate, constant} from 'baconjs';
-import noop from 'lodash/noop';
-import React, {useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
+import {combineTemplate, constant} from 'baconjs'
+import noop from 'lodash/noop'
+import React, {useEffect, useState} from 'react'
+import ReactDOM from 'react-dom'
 
-import {PhaseContext, HYDRATION, SERVER} from '../src/context';
-import {hydrate, widget, renderToHtml, WidgetContext} from '../src';
+import PhaseContext from '../src/context/PhaseContext'
+import Phase from '../src/Phase'
 
-import ErrorBoundary from './util/error-boundary';
+import {hydrate, widget, renderToHtml, WidgetContext} from '../src'
+
+import ErrorBoundary from './util/error-boundary'
 
 jest.mock('uuid', () => ({
     __esModule: true,
     v1: jest.fn(() => '0123456789abcdef'),
-}));
+}))
 
-const Context = React.createContext<WidgetContext<{}>>(undefined!);
+const Context = React.createContext<WidgetContext<{}>>(undefined!)
 
 const Component: React.FC<{children?: React.ReactNode}> = ({children}) => (
     <div>
@@ -23,49 +25,49 @@ const Component: React.FC<{children?: React.ReactNode}> = ({children}) => (
             <PhaseContext.Consumer>
                 {(getPhase) => {
                     switch (getPhase()) {
-                        case SERVER:
-                            return 'SSR';
-                        case HYDRATION:
-                            return 'hydration';
+                        case Phase.server:
+                            return 'SSR'
+                        case Phase.hydration:
+                            return 'hydration'
                         default:
-                            return 'client';
+                            return 'client'
                     }
                 }}
             </PhaseContext.Consumer>
         </p>
     </div>
-);
+)
 
 const Child = widget({
     name: 'child',
-    stream: () => combineTemplate({state: {}}),
-    initialState: {},
     component: Component,
     context: Context,
-});
+    state: () => combineTemplate({state: {}}),
+    dehydrate: () => ({}),
+    hydrate: () => ({}),
+    meta: () => ({}),
+})
 
 // Bypass compile-time type checking for this scenario
-const ChildComponent: React.FC<{}> = Child as unknown as React.FC<{}>;
+const ChildComponent: React.FC<{}> = Child as unknown as React.FC<{}>
 
 const Grandchild: React.FC<{}> = () => (
     <div>
         <h3>Grandchild</h3>
     </div>
-);
+)
 
 const Parent = widget({
     name: 'parent',
-    stream: () => constant({state: {}, hydration: {}}),
-    initialState: {},
     component: () => {
-        const [shouldRenderChild, setShouldRenderChild] = useState(false);
+        const [shouldRenderChild, setShouldRenderChild] = useState(false)
 
         useEffect(
             () => {
-                setShouldRenderChild(true);
+                setShouldRenderChild(true)
             },
             []
-        );
+        )
 
         return (
             <ErrorBoundary>
@@ -81,40 +83,44 @@ const Parent = widget({
                     ) : null}
                 </div>
             </ErrorBoundary>
-        );
+        )
     },
     context: Context,
-});
+    state: () => constant({}),
+    dehydrate: () => ({}),
+    hydrate: () => ({}),
+    meta: () => ({}),
+})
 
 // Tests that the hydration phase ends after hydration
 describe('End hydration phase', () => {
-    let originalConsoleInfo: typeof console.info | undefined;
-    let originalConsoleError: typeof console.error | undefined;
+    let originalConsoleInfo: typeof console.info | undefined
+    let originalConsoleError: typeof console.error | undefined
 
     beforeEach(async () => {
-        document.body.innerHTML = await renderToHtml(<Parent />);
-        eval(document.querySelector('script')!.innerHTML);
-        originalConsoleInfo = console.info;
-        console.info = () => {};
-        hydrate(Parent);
-        originalConsoleError = console.error;
-        console.error = noop;
-        await new Promise((resolve) => void setTimeout(resolve)); // wait for the component to mount
-    });
+        document.body.innerHTML = await renderToHtml(<Parent />)
+        eval(document.querySelector('script')!.innerHTML)
+        originalConsoleInfo = console.info
+        console.info = () => {}
+        hydrate(Parent)
+        originalConsoleError = console.error
+        console.error = noop
+        await new Promise((resolve) => void setTimeout(resolve)) // wait for the component to mount
+    })
 
     afterEach(() => {
-        console.info = originalConsoleInfo!;
-        console.error = originalConsoleError!;
-        delete window.__WIDGET_DATA__;
-        ReactDOM.unmountComponentAtNode(document.getElementById('0123456789abcdef')!);
-        document.body.innerHTML = '';
-    });
+        console.info = originalConsoleInfo!
+        console.error = originalConsoleError!
+        delete window.__WIDGET_DATA__
+        ReactDOM.unmountComponentAtNode(document.getElementById('0123456789abcdef')!)
+        document.body.innerHTML = ''
+    })
 
     test('it does not try to hydrate the child after hydration has occurred', async () => {
-        expect(document.querySelector('#error')).toBe(null);
-    });
+        expect(document.querySelector('#error')).toBe(null)
+    })
 
     test('it does not render the child in the context of the hydration render phase', () => {
-        expect(document.querySelector('#phase')!.innerHTML).toBe('client');
-    });
-});
+        expect(document.querySelector('#phase')!.innerHTML).toBe('client')
+    })
+})

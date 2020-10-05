@@ -1,13 +1,15 @@
 import {widget} from '../../../../src';
 
-import context from '../../context/very-simple-context';
-import {stream, initialState, VerySimpleProps, VerySimpleState, VerySimpleMeta} from '../../widget-streams/very-simple';
+import context from '../../context/very-simple-context'
+import {dehydrate, hydrate, meta, state} from '../../widget-streams/very-simple';
 import component from '../components/very-simple';
 
-export default widget<VerySimpleProps, VerySimpleState, {}, VerySimpleMeta>({
+export default widget({
     name: 'very-simple--hooked',
-    component,
     context,
-    stream,
-    initialState,
-});
+    component,
+    state,
+    dehydrate,
+    hydrate,
+    meta,
+})

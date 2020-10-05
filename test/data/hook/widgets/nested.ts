@@ -1,13 +1,15 @@
-import {widget} from '../../../../src';
+import {widget} from '../../../../src'
 
-import context from '../../context/nested-context';
-import {stream, initialState} from '../../widget-streams/nested';
-import component from '../components/nested';
+import context from '../../context/nested-context'
+import {dehydrate, hydrate, meta, state} from '../../widget-streams/nested'
+import component from '../components/nested'
 
 export default widget({
     name: 'nested--hooked',
-    component,
     context,
-    stream,
-    initialState,
-});
+    component,
+    state,
+    dehydrate,
+    hydrate,
+    meta,
+})

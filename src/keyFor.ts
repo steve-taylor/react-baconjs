@@ -1,7 +1,8 @@
-import {sha256} from 'hash.js';
-import { SerializableObject } from './types';
+import {sha256} from 'hash.js'
 
-const ignoredValueTypes: Set<string> = new Set(['undefined', 'function', 'symbol']);
+import { SerializableObject } from './types'
+
+const ignoredValueTypes: Set<string> = new Set(['undefined', 'function', 'symbol'])
 
 /**
  * Generate a <code>hydration</code> key based on a widget name and the props of one of its instances
@@ -34,5 +35,5 @@ export default function keyFor(name: string, props: SerializableObject): string 
                 )
             )
             .digest('hex')
-    }`;
+    }`
 }

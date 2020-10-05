@@ -1,9 +1,7 @@
-import {constant, Error as BaconError} from 'baconjs';
+import {constant, Error as BaconError, Property} from 'baconjs';
 
-export function stream() {
+export function state(): Property<{}> {
     return constant(null)
-        .flatMapLatest<{state: {}}>(() => new BaconError('Nope!'))
-        .toProperty();
+        .flatMapLatest<{}>(() => new BaconError('Nope!'))
+        .toProperty()
 }
-
-export const initialState = {};

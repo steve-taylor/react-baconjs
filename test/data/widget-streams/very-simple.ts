@@ -5,25 +5,31 @@ export type VerySimpleProps = {
 };
 
 export type VerySimpleState = {
-    x?: number;
+    x: number;
 }
+
+export type VerySimpleHydration = number
 
 export type VerySimpleMeta = {
     state: VerySimpleState;
 }
 
-export type VerySimpleWidgetData = {
-    state: VerySimpleState;
-};
-
-export function stream(props$: Property<VerySimpleProps>): Property<VerySimpleWidgetData> {
-    const power$ = props$.map(({power}) => power === null ? 1 : power);
+export function state(props$: Property<VerySimpleProps>): Property<VerySimpleState> {
+    const power$ = props$.map(({power}) => power ?? 1);
 
     return combineTemplate({
-        state: {
-            x: power$.map((power) => 5 ** power),
-        },
-    });
+        x: power$.map((power) => 5 ** power)
+    })
 }
 
-export const initialState: VerySimpleState = {};
+export function dehydrate({x}: VerySimpleState): VerySimpleHydration {
+    return x
+}
+
+export function hydrate(x: VerySimpleHydration): VerySimpleState {
+    return {x}
+}
+
+export function meta() {
+    return {}
+}

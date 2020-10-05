@@ -1,17 +1,21 @@
 import React from 'react';
-import {Inject} from '../../../../src';
+import {Inject, Loading} from '../../../../src';
 
 import nestedContext from '../../context/nested-context';
 import SimpleWidget from '../widgets/simple';
 
 const Nested = () => (
     <section>
-        <Inject context={nestedContext}>
-            {({isLoading}) => isLoading ? (
+        <Loading context={nestedContext}>
+            {() => (
                 <div>
                     Loading...
                 </div>
-            ) : (
+            )}
+        </Loading>
+
+        <Inject context={nestedContext}>
+            {() => (
                 <ul>
                     <Inject context={nestedContext}>
                         {({a}) => (

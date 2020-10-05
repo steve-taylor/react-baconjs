@@ -1,6 +1,6 @@
-import React from 'react';
-import { WidgetContext } from '../../../src/types';
+import React from 'react'
+import {WidgetContext} from '../../../src'
 
-import { VerySimpleState } from '../widget-streams/very-simple';
+import {VerySimpleState} from '../widget-streams/very-simple'
 
-export default React.createContext<WidgetContext<VerySimpleState>>(undefined!);
+export default React.createContext<WidgetContext<VerySimpleState>>(undefined!)

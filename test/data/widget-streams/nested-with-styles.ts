@@ -1,53 +1,51 @@
-import {combineAsArray, combineTemplate, constant, Property} from 'baconjs';
+import {combineAsArray, combineTemplate, Property} from 'baconjs'
 
-import fetchV from '../streams/fetch-v';
-import fetchW from '../streams/fetch-w';
+import fetchV from '../streams/fetch-v'
+import fetchW from '../streams/fetch-w'
 
 export type Props = {
-    coefficient: number | null;
-};
-
-export type State = {
-    a?: number;
-    b?: number;
-};
-
-export type Hydration = {
-    v: number;
-    w: number;
-};
-
-export type WidgetData = {
-    state: State;
-    hydration?: Hydration;
-};
-
-export function stream(props$: Property<Props>, hydration: Hydration | undefined): Property<WidgetData> {
-    const coefficient$ = props$.map(({coefficient}) => coefficient === null ? 1 : coefficient);
-
-    // Get {v, w} from hydration if hydrating, or from an external data source if not hydrating.
-    const v$ = hydration
-        ? constant(hydration.v)
-        : fetchV();
-
-    const w$ = hydration
-        ? constant(hydration.w)
-        : fetchW();
-
-    // Calculate {a, b} based on v (from external data source) and coefficient (from props)
-    const a$ = combineAsArray(v$, coefficient$).map(([v, coefficient]) => coefficient * v);
-    const b$ = combineAsArray(w$, coefficient$).map(([w, coefficient]) => coefficient * w);
-
-    return combineTemplate({
-        state: {
-            a: a$,
-            b: b$,
-        },
-        hydration: {
-            v: v$,
-            w: w$,
-        },
-    });
+    coefficient: number | null
 }
 
-export const initialState: State = {};
+export type State = {
+    a: number
+    b: number
+    v: number
+    w: number
+}
+
+export type Hydration = [number, number] // [v, w]
+
+export type Meta = {
+    maxAge: number
+}
+
+export function state(props$: Property<Props>): Property<State> {
+    const coefficient$ = props$.map(({coefficient}) => coefficient ?? 1)
+    const v$ = props$.first().flatMapLatest(() => fetchV())
+    const w$ = props$.first().flatMapLatest(() => fetchW())
+
+    return combineTemplate({
+        a: combineAsArray(v$, coefficient$).map(([v, coefficient]) => coefficient * v),
+        b: combineAsArray(w$, coefficient$).map(([w, coefficient]) => coefficient * w),
+        v: v$,
+        w: w$,
+    })
+}
+
+export function dehydrate({v, w}: State): Hydration {
+    return [v, w]
+}
+
+export function hydrate([v, w]: Hydration, {coefficient}: Props): State {
+    return {
+        a: (coefficient ?? 1) * v,
+        b: (coefficient ?? 1) * w,
+        v,
+        w,
+    }
+}
+
+export function meta(): Meta {
+    return {maxAge: 30}
+}

@@ -1,43 +1,48 @@
-import propTypes from 'prop-types';
-import React from 'react';
+import React from 'react'
 
-import {CompareWidgetState, WidgetContext} from './types';
-import useWidgetState from './use-widget-state';
+import {CompareWidgetState, WidgetContext} from './types'
+import useWidgetState from './useWidgetState'
 
-interface InjectOptions<S> {
-    context: React.Context<WidgetContext<S>>;
-    compare?: CompareWidgetState<S>;
-    children: (state: S) => React.ReactNode;
+type InjectOptions<STATE> = {
+    context: React.Context<WidgetContext<STATE>>
+    compare?: CompareWidgetState<STATE>
+    children: (state: STATE) => React.ReactNode
 }
 
-export default function Inject<S>({
+/**
+ * Render via the provided render function when the widget has state.
+ *
+ * @param context - the widget’s context
+ * @param compare - an optional comparison function
+ * @param children - the render function
+ */
+export function Inject<STATE>({
     context,
     compare,
     children,
-}: InjectOptions<S>): React.ReactElement {
-    const state = useWidgetState<S>(context, compare);
+}: InjectOptions<STATE>): JSX.Element | null {
+    const widgetState = useWidgetState<STATE>(context, compare)
 
-    return (state ? children(state) : null) as React.ReactElement;
+    // TypeScript type guards don’t survive array destructuring :(
+    return widgetState[1] ? null : children(widgetState[0]) as JSX.Element
 }
 
-/* istanbul ignore next */
-if (process.env.NODE_ENV === 'development') {
-    Inject.propTypes = {
+type LoadingOptions<STATE> = {
+    context: React.Context<WidgetContext<STATE>>
+    children: () => React.ReactNode
+}
 
-        /** React context for all instances of this component */
-        context: propTypes.object.isRequired,
+/**
+ * Render a loading state via the provided render function when the widget is loading.
+ *
+ * @param context - the widget context
+ * @param children - the render function
+ */
+export function Loading<STATE>({
+    context,
+    children,
+}: LoadingOptions<STATE>): JSX.Element | null {
+    const [, isLoading] = useWidgetState<STATE>(context)
 
-        /**
-         * (Optional) A function that compares two consecutive widget states for equality,
-         * or an array of widget property names to compare two consecutive
-         * widget states
-         */
-        compare: propTypes.oneOfType([
-            propTypes.func,
-            propTypes.arrayOf(propTypes.string),
-        ]),
-
-        /** A render function that converts a widget state into React elements */
-        children: propTypes.func.isRequired,
-    };
+    return isLoading ? children() as JSX.Element : null
 }

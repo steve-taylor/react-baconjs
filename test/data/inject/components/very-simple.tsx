@@ -1,7 +1,7 @@
-import React from 'react';
-import {Inject} from '../../../../src';
+import React from 'react'
+import {Inject} from '../../../../src'
 
-import VerySimpleContext from '../../context/very-simple-context';
+import VerySimpleContext from '../../context/very-simple-context'
 
 const VerySimple = React.forwardRef<unknown>((_props, ref) => (
     <section ref={ref as React.Ref<never>}>
@@ -9,8 +9,8 @@ const VerySimple = React.forwardRef<unknown>((_props, ref) => (
             {({x}) => x}
         </Inject>
     </section>
-));
+))
 
-VerySimple.displayName = 'VerySimple';
+VerySimple.displayName = 'VerySimple'
 
-export default VerySimple;
+export default VerySimple

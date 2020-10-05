@@ -1,11 +1,11 @@
-import React from 'react';
-import {useWidgetState} from '../../../../src';
+import React from 'react'
+import {useWidgetState} from '../../../../src'
 
-import nestedContext from '../../context/nested-context';
-import SimpleWidget from '../widgets/simple';
+import nestedContext from '../../context/nested-context'
+import SimpleWidget from '../widgets/simple'
 
 export default function Nested() {
-    const {isLoading, a, b} = useWidgetState(nestedContext)!;
+    const [state, isLoading] = useWidgetState(nestedContext)!
 
     return (
         <section>
@@ -16,10 +16,10 @@ export default function Nested() {
             ) : (
                 <ul>
                     <li>
-                        {a}
+                        {state!.a}
                     </li>
                     <li>
-                        {b}
+                        {state!.b}
                     </li>
                     <li>
                         <SimpleWidget power={4} />
@@ -27,5 +27,5 @@ export default function Nested() {
                 </ul>
             )}
         </section>
-    );
+    )
 }
