@@ -1,6 +1,6 @@
 {
   "name": "react-baconjs",
-  "version": "0.2.0-alpha.1",
+  "version": "0.2.0-alpha.2",
   "description": "React bindings for Bacon.js",
   "author": "Steve Taylor",
   "license": "MIT",
@@ -44,7 +44,6 @@
   "peerDependencies": {
     "baconjs": ">=3.0.0 <4",
     "lodash": "^4.17.19",
-    "prop-types": "^15.6.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "styled-components": ">=3.3.3"
@@ -53,7 +52,6 @@
     "@types/jest": "^26.0.14",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
-    "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
     "@types/serialize-javascript": "^1.5.0",
