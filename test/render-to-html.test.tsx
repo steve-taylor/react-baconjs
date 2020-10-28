@@ -3,7 +3,6 @@
 import {EventStream} from 'baconjs'
 import noop from 'lodash/noop'
 import React from 'react'
-import {__DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS} from 'styled-components'
 import {renderToHtml, StyledComponentsServerRenderer} from '../src'
 
 import SimpleWidget1 from './data/hook/widgets/simple'
@@ -25,8 +24,6 @@ jest.mock('uuid', () => ({
     __esModule: true,
     v1: jest.fn(() => '0123456789abcdef'),
 }))
-
-const {StyleSheet} = __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS // I ain't afraid of no ghosts
 
 type FetchNumberSpy = jest.SpyInstance<EventStream<number>, []> | undefined
 
@@ -131,16 +128,6 @@ describe('renderToHtml(widget)', () => {
             })
 
             describe('styled nested widget', () => {
-                beforeEach(() => {
-                    // Pretend we're on a server
-                    StyleSheet.reset(true)
-                })
-
-                afterEach(() => {
-                    // Stop pretending
-                    StyleSheet.reset()
-                })
-
                 test('renders correctly', async () => {
                     const renderer = new StyledComponentsServerRenderer()
                     const body = await renderToHtml(

@@ -97,26 +97,37 @@ exports[`renderToHtml(widget) <Inject /> simple widget without mount point class
 
 exports[`renderToHtml(widget) <Inject /> styled nested widget renders correctly 1`] = `
 <head>
-  <style data-styled="ljOnAL gUgpWW" data-styled-version="4.4.1">
-    /* sc-component-id: sc-htpNat */
-    .ljOnAL {
+  <style data-styled="true" data-styled-version="5.2.0">
+    .dEKVyS {
       padding: 7px;
       background: #bbb;
     }
 
-    /* sc-component-id: sc-bxivhb */
-    .gUgpWW {
+    /*!sc*/
+    data-styled.g3[id="sc-dlnjPT"] {
+      content: "dEKVyS,"
+    }
+
+    /*!sc*/
+    .dfKzZy {
       margin: 7px;
       background: #666;
       color: #ddd;
     }
+
+    /*!sc*/
+    data-styled.g4[id="sc-hKFyIo"] {
+      content: "dfKzZy,"
+    }
+
+    /*!sc*/
   </style>
 </head>
 
 <body>
   <div id="0123456789abcdef">
-    <section class="sc-htpNat ljOnAL">
-      <ul class="sc-bxivhb gUgpWW">
+    <section class="sc-dlnjPT dEKVyS">
+      <ul class="sc-hKFyIo dfKzZy">
         <li>27</li>
         <li>72</li>
         <li>
@@ -250,26 +261,37 @@ exports[`renderToHtml(widget) useWidgetState() simple widget without mount point
 
 exports[`renderToHtml(widget) useWidgetState() styled nested widget renders correctly 1`] = `
 <head>
-  <style data-styled="fDLULr gjMIGH" data-styled-version="4.4.1">
-    /* sc-component-id: sc-bdVaJa */
-    .fDLULr {
+  <style data-styled="true" data-styled-version="5.2.0">
+    .llCpDD {
       padding: 7px;
       background: #bbb;
     }
 
-    /* sc-component-id: sc-bwzfXH */
-    .gjMIGH {
+    /*!sc*/
+    data-styled.g1[id="sc-bdnylx"] {
+      content: "llCpDD,"
+    }
+
+    /*!sc*/
+    .jLLzPg {
       margin: 7px;
       background: #666;
       color: #ddd;
     }
+
+    /*!sc*/
+    data-styled.g2[id="sc-gtssRu"] {
+      content: "jLLzPg,"
+    }
+
+    /*!sc*/
   </style>
 </head>
 
 <body>
   <div id="0123456789abcdef">
-    <section class="sc-bdVaJa fDLULr">
-      <ul class="sc-bwzfXH gjMIGH">
+    <section class="sc-bdnylx llCpDD">
+      <ul class="sc-gtssRu jLLzPg">
         <li>27</li>
         <li>72</li>
         <li>
