@@ -6,7 +6,7 @@ Create functional-reactive, universal web apps with ease.
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/react-baconjs/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/react-baconjs.svg?style=flat)](https://www.npmjs.com/package/react-baconjs)
 ![npm](https://img.shields.io/npm/dw/react-baconjs.svg)
-[![Build Status](https://travis-ci.org/steve-taylor/react-baconjs.svg?branch=develop)](https://travis-ci.org/steve-taylor/react-baconjs)
+[![Build Status](https://travis-ci.com/steve-taylor/react-baconjs.svg?branch=develop)](https://travis-ci.com/steve-taylor/react-baconjs)
 [![PRs Welcome](https://img.shields.io/badge/pull_requests-welcome-brightgreen.svg)](https://github.com/react-baconjs/blob/master/CONTRIBUTING.md)
 
 ## Installation
