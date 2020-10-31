@@ -218,13 +218,13 @@ async function renderUserProfilesPage(userIds: string[]): {
 
     // Generate server-side rendered profile of users
     const htmlArray = await Promise.all(
-        userIds.map((userId) => renderToHtml(
+        userIds.map((userId) => renderToHtml<Meta>(
             <ProfileWidget userId={userId} />,
             {
-                onMeta: (metadata: Meta) => {
+                onMeta: meta => {
                     // Keep the smallest non-zero maxAge
-                    if (data.maxAge && data.maxAge < maxAge) {
-                        maxAge = data.maxAge
+                    if (meta.maxAge && meta.maxAge < maxAge) {
+                        maxAge = meta.maxAge
                     }
                 },
             }
@@ -249,6 +249,10 @@ the event will be passed to the `onMeta` function specified in `renderToHtml`,
 if specified at all. It is up to the `onMeta` function to accumulate `meta`
 objects as it sees fit, bearing in mind that `onMeta` is called in render
 order, which is defined by `ReactDOM.renderToString`.
+
+**Note:** The `META` type passed to `renderToHtml` should be the union of the
+widget’s `META` type and that of all its children, as every widget in the
+hierarchy can produce metadata.
 
 Somewhere on the client:
 

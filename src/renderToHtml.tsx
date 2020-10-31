@@ -29,7 +29,7 @@ type RenderToHtmlOptions<META> = {
  * @param [options.className]      - an optional class name for the mount point
  * @returns a promise that will resolve to the element's HTML
  */
-export default async function renderToHtml<PROPS extends BaseProps, STATE, HYDRATION extends Serializable, META = unknown>(
+export default async function renderToHtml<META, PROPS extends BaseProps>(
     widgetElement: React.ReactElement<PROPS, WidgetType<PROPS>>,
     {
         render = defaultRender,
@@ -45,11 +45,11 @@ export default async function renderToHtml<PROPS extends BaseProps, STATE, HYDRA
     }
 
     interface RegisteredStreams {
-        [key: string]: Property<WidgetData<STATE, HYDRATION, META>>
+        [key: string]: Property<WidgetData<unknown, Serializable, META>>
     }
 
     interface Hydration {
-        [key: string]: HYDRATION
+        [key: string]: Serializable
     }
 
     const registeredStreams: RegisteredStreams = {}
@@ -59,7 +59,7 @@ export default async function renderToHtml<PROPS extends BaseProps, STATE, HYDRA
     const getStream = (key: string) => registeredStreams[key]
 
     // Register stream. In the background, this stores the initial event in hydration, then deregisters the stream.
-    const registerStream = (key: string, stream$: Property<WidgetData<STATE, HYDRATION, META>>) => {
+    const registerStream = (key: string, stream$: Property<WidgetData<unknown, Serializable, META>>) => {
         registeredStreams[key] = stream$
         pendingKeys.add(key)
     }
@@ -72,7 +72,7 @@ export default async function renderToHtml<PROPS extends BaseProps, STATE, HYDRA
     // Start walking the element tree.
     ReactDOMServer.renderToStaticMarkup((
         <PhaseContext.Provider value={() => Phase.server}>
-            <ServerContextProvider<STATE, HYDRATION, META> value={{getStream, registerStream, onError}}>
+            <ServerContextProvider<unknown, Serializable, META> value={{getStream, registerStream, onError}}>
                 {widgetElement}
             </ServerContextProvider>
         </PhaseContext.Provider>
@@ -113,7 +113,7 @@ export default async function renderToHtml<PROPS extends BaseProps, STATE, HYDRA
     // Now that everything is resolved, synchronously render the html.
     const html = render((
         <PhaseContext.Provider value={() => Phase.server}>
-            <ServerContextProvider<STATE, HYDRATION, META> value={{getStream, onMeta}}>
+            <ServerContextProvider<unknown, Serializable, META> value={{getStream, onMeta}}>
                 {widgetElement}
             </ServerContextProvider>
         </PhaseContext.Provider>
