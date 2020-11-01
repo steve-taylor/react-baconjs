@@ -23,7 +23,10 @@ type WidgetOptions<PROPS extends BaseProps, STATE, HYDRATION extends Serializabl
     timeout?: number
 }
 
-type CreateStateStream<STATE, PROPS extends BaseProps> = (props$: Property<PROPS>, hydratedProps?: PROPS, hydratedState?: STATE) => Property<STATE>
+type CreateStateStream<STATE, PROPS extends BaseProps> = (
+    props$: Property<PROPS>,
+    hydrated$: Property<{props: PROPS, state: STATE}>
+) => Property<STATE>
 
 type Dehydrate<HYDRATION extends Serializable, STATE> = (state: STATE) => HYDRATION
 
@@ -60,6 +63,11 @@ export default function widget<PROPS extends BaseProps, STATE, HYDRATION extends
     }: WidgetOptions<PROPS, STATE, HYDRATION, META>
 ): WidgetType<PROPS> {
     type WidgetComponentProps = PROPS & {innerRef: React.Ref<unknown>}
+
+    type Hydrated = {
+        props: PROPS
+        state: STATE
+    }
 
     type WidgetComponentState = {
         propsBus: Bus<PROPS>
@@ -116,7 +124,7 @@ export default function widget<PROPS extends BaseProps, STATE, HYDRATION extends
                                             let stream$: Property<WidgetData<STATE, HYDRATION, META>> = getStream(key)
 
                                             if (!stream$) {
-                                                const state$ = state(this.props$)
+                                                const state$ = state(this.props$, never<Hydrated>().toProperty())
 
                                                 stream$ = combineTemplate({
                                                     state: state$,
@@ -227,12 +235,18 @@ export default function widget<PROPS extends BaseProps, STATE, HYDRATION extends
                                                                 const hydratedState = hydrate(hydration, firstProps)
 
                                                                 return constant(hydratedState)
-                                                                    .concat(state(this.props$.skip(1), firstProps, hydratedState))
+                                                                    .concat(state(
+                                                                        this.props$.skip(1),
+                                                                        constant<Hydrated>({
+                                                                            props: firstProps,
+                                                                            state: hydratedState,
+                                                                        })
+                                                                    ))
                                                             })
                                                     } else {
                                                         // In case hydration data isn’t available (probably a serialization issue),
                                                         // fall back to pure client-side rendering.
-                                                        this.state$ = state(this.props$)
+                                                        this.state$ = state(this.props$, never<Hydrated>().toProperty())
                                                     }
                                                 }
 
@@ -256,7 +270,7 @@ export default function widget<PROPS extends BaseProps, STATE, HYDRATION extends
                             default: { // eslint-disable-line no-fallthrough
                                 if (!this.state$) {
                                     // Pass the state object to subscribers (Inject and useWidgetState)
-                                    this.state$ = state(this.props$)
+                                    this.state$ = state(this.props$, never<Hydrated>().toProperty())
                                 }
 
                                 return (

@@ -173,8 +173,7 @@ const ProfileWidget = widget<Props, State, Hydration, Meta>({
 // Generate state stream from props stream.
 function state(
     props$: Property<Props>,
-    hydratedProps?: Props,  // provided on hydration only
-    hydratedState?: State   // provided on hydration only
+    hydrated$: Property<{props: Props, state: State}>
 ): Property<State> {
     const userId$ = props$.map(({userId}) => userId)
 
