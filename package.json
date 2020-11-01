@@ -1,12 +1,11 @@
 {
   "name": "react-baconjs",
-  "version": "0.2.0-alpha.7",
+  "version": "0.2.0-alpha.8",
   "description": "React bindings for Bacon.js",
   "author": "Steve Taylor",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "type": "module",
   "types": "dist/esm/index.d.ts",
   "scripts": {
     "ci-cd": "echo 'CI-CD' && npm-run-all --silent clean --parallel ci-cd:*",
